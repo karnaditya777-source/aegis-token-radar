@@ -60,7 +60,7 @@ Allow: /
 Allow: /static/
 Disallow: /api/demo/
 
-Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: https://aegis-token-radar.vercel.app/sitemap.xml
 """
 
 @app.get("/sitemap.xml")
@@ -68,13 +68,13 @@ async def serve_sitemap():
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://yourdomain.com/</loc>
+    <loc>https://aegis-token-radar.vercel.app/</loc>
     <lastmod>2026-10-18</lastmod>
     <changefreq>always</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/api/tokens/latest</loc>
+    <loc>https://aegis-token-radar.vercel.app/api/tokens/latest</loc>
     <changefreq>always</changefreq>
     <priority>0.8</priority>
   </url>
