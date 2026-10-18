@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aegis Token Radar - Real-Time Crypto Scam & Risk Intelligence</title>
+  
+  <!-- SEO & Google Search Optimization -->
+  <meta name="description" content="Real-time automated cryptocurrency detector and smart contract risk analysis platform. Detect honeypots, unlocked liquidity, mint exploits, and scam tokens on Solana, Base, Ethereum, and BSC.">
+  <meta name="keywords" content="crypto risk detector, rug pull checker, honeypot detector, solana token scanner, memecoin security audit, dex launch radar, crypto scam detection, token risk score">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="author" content="Aegis Crypto Intelligence">
+  
+  <!-- Open Graph / Facebook / Discord Previews -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aegisradar.crypto/">
+  <meta property="og:title" content="Aegis Token Radar - Live Crypto Scam & Risk Intelligence">
+  <meta property="og:description" content="Automated detection and 0-100 algorithmic risk scoring for newly launched crypto tokens.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1200&q=80">
+
+  <!-- Twitter Card Previews -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Aegis Token Radar - Live Crypto Scam & Risk Intelligence">
+  <meta name="twitter:description" content="Real-time multi-chain scanner detecting newly created tokens and auditing rug-pull risks.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1200&q=80">
+
+  <!-- Google Structured Data (JSON-LD) for Rich Search Snippets -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Aegis Token Radar",
+    "url": "https://aegisradar.crypto/",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "description": "Automated real-time scanner for newly launched cryptocurrency tokens and risk evaluation.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header>
+    <div class="nav-container">
+      <div class="logo-group">
+        <div class="logo-icon">🛡️</div>
+        <div class="logo-text">
+          <h1>AEGIS TOKEN RADAR</h1>
+          <span><span>●</span> REAL-TIME SCAM & RISK INTELLIGENCE</span>
+        </div>
+      </div>
+
+      <!-- Live Stats Ticker -->
+      <div class="stats-ticker">
+        <div class="stat-item">
+          <div class="pulse-dot"></div>
+          <span class="stat-label">Live Radar:</span>
+          <span class="stat-value" id="statDetectorStatus">ONLINE</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Scanned:</span>
+          <span class="stat-value" id="statTotalDetected">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label" style="color: #f87171;">Scams Caught:</span>
+          <span class="stat-value" style="color: #f87171;" id="statScamsCaught">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label" style="color: #34d399;">Safe Gems:</span>
+          <span class="stat-value" style="color: #34d399;" id="statSafeGems">0</span>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <button class="btn-toggle-sound" id="btnSound">🔕 Alert Chime: OFF</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main App Layout -->
+  <main>
+    <!-- Hero Scanner Section -->
+    <section class="scanner-hero">
+      <div class="scanner-headline">
+        <h2>Automated Token Risk & Rug Pull Radar</h2>
+        <p>Instantly analyzes new crypto launches for honeypots, unlocked liquidity, mint exploits, and insider dumping.</p>
+      </div>
+
+      <div class="search-bar-wrap">
+        <input 
+          type="text" 
+          id="inputScanAddress" 
+          class="search-input" 
+          placeholder="Paste any Contract Address (Solana Mint, 0x Ethereum, BSC, Base)..." 
+          autocomplete="off"
+        >
+        <button id="btnScan" class="btn-scan">
+          <span>⚡</span> Scan Contract
+        </button>
+      </div>
+
+      <!-- Demo Benchmark Pills -->
+      <div class="demo-pill-container">
+        <span class="demo-pill-label">Quick Test Scenarios:</span>
+        <button class="demo-pill safe" data-demo-id="case_safe_gem">
+          <span>✓</span> Solid Community Token (AEGIS)
+        </button>
+        <button class="demo-pill scam" data-demo-id="case_honeypot">
+          <span>✗</span> Honeypot Scam (ELONROCKET)
+        </button>
+        <button class="demo-pill scam" data-demo-id="case_unlocked_rug">
+          <span>✗</span> Unlocked LP Rug Pull (PEPEAI)
+        </button>
+        <button class="demo-pill meme" data-demo-id="case_speculative_meme">
+          <span>⚠</span> Viral Meme Token (COATCAT)
+        </button>
+      </div>
+    </section>
+
+    <!-- Toolbar Filters -->
+    <div class="toolbar-wrap">
+      <div class="toolbar-left">
+        <span class="filter-group-label">Chain:</span>
+        <div class="filter-btn-group">
+          <button class="filter-btn active" data-chain="all">All Chains</button>
+          <button class="filter-btn" data-chain="solana">Solana</button>
+          <button class="filter-btn" data-chain="ethereum">Ethereum</button>
+          <button class="filter-btn" data-chain="base">Base</button>
+          <button class="filter-btn" data-chain="bsc">BNB Chain</button>
+        </div>
+
+        <span class="filter-group-label" style="margin-left: 8px;">Risk:</span>
+        <div class="filter-btn-group">
+          <button class="filter-btn active" data-category="all">All</button>
+          <button class="filter-btn" data-category="safe" style="color: #34d399;">🟢 Low Risk</button>
+          <button class="filter-btn" data-category="speculative" style="color: #fbbf24;">🟡 Speculative</button>
+          <button class="filter-btn" data-category="extreme_risk" style="color: #f87171;">🔴 High / Scam</button>
+        </div>
+      </div>
+
+      <div class="toolbar-right">
+        <select class="filter-select" id="selectLiquidity">
+          <option value="0">Any Liquidity</option>
+          <option value="5000">Min $5,000 Liq</option>
+          <option value="25000">Min $25,000 Liq</option>
+          <option value="100000">Min $100,000 Liq</option>
+        </select>
+
+        <input 
+          type="text" 
+          id="inputSearch" 
+          class="filter-select" 
+          placeholder="Filter symbol/name..." 
+          style="width: 160px;"
+        >
+
+        <button class="btn-refresh" id="btnRefresh">
+          <span>🔄</span> Refresh
+        </button>
+      </div>
+    </div>
+
+    <!-- Live Tokens Grid Header -->
+    <div class="radar-grid-header">
+      <h2 class="radar-title">
+        <span>📡</span> Newly Launched Tokens Feed
+      </h2>
+      <span style="font-size: 0.8rem; color: var(--text-dim);">Auto-updating every 10s</span>
+    </div>
+
+    <!-- Dynamic Grid of Detected Tokens -->
+    <div class="tokens-grid" id="tokensGrid">
+      <!-- Injected via JavaScript -->
+    </div>
+  </main>
+
+  <!-- Deep Audit Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-container">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="modal-header-info">
+          <div>
+            <h2 id="modalTokenSymbol" style="font-size: 1.4rem; font-weight: 800;">TOKEN</h2>
+            <div style="font-size: 0.82rem; color: var(--text-dim); display: flex; align-items: center; gap: 8px;">
+              <span id="modalTokenName">Token Name</span>
+              <span>•</span>
+              <span class="chain-badge" id="modalTokenChain">SOLANA</span>
+              <span>•</span>
+              <code id="modalTokenAddress" style="font-size: 0.75rem; background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 4px;">0x...</code>
+            </div>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="modalClose">✕</button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+
+        <!-- Dual Score Banner: Risk vs Potential -->
+        <div class="score-comparison-banner">
+          <!-- Risk Score Box -->
+          <div class="score-box risk-box" id="modalRiskBox">
+            <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-dim); font-weight: 700; letter-spacing: 0.5px;">
+              CONTRACT SAFETY & INTEGRITY
+            </span>
+            <div class="radial-score-num" id="modalRiskScore">82/100</div>
+            <div style="font-size: 1rem; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+              <span id="modalRiskBadge">🟢</span> <span id="modalRiskLevel">Relatively Low Risk</span>
+            </div>
+            <div class="score-verdict-text" id="modalRiskVerdict">
+              Contract appears legitimate with healthy liquidity safeguards.
+            </div>
+          </div>
+
+          <!-- Potential Score Box -->
+          <div class="score-box potential-box">
+            <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-dim); font-weight: 700; letter-spacing: 0.5px;">
+              MARKET MOMENTUM & POTENTIAL
+            </span>
+            <div class="radial-score-num" style="color: var(--potential-purple);" id="modalPotentialScore">68/100</div>
+            <div style="font-size: 1rem; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+              <span id="modalPotentialBadge">🚀</span> <span id="modalPotentialLevel">High Momentum</span>
+            </div>
+            <div class="score-verdict-text">
+              <strong id="modalQuadrantName" style="color: #a78bfa;">Safe Accumulator</strong>: 
+              <span id="modalQuadrantDesc">High contract security combined with active market demand.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Distinction Callout Banner -->
+        <div class="distinction-note">
+          <span style="font-size: 1.2rem;">💡</span>
+          <div>
+            <strong>Risk vs. Potential Distinction:</strong> A token having a low risk score does <em>not</em> guarantee it will make you money. It signifies the contract is technically non-malicious (not a honeypot, no hidden mint, locked liquidity). Market potential reflects community velocity and buyer accumulation.
+          </div>
+        </div>
+
+        <!-- Plain-English Checklist Card (User Requested Format) -->
+        <h3 class="audit-section-title">
+          <span>📋</span> Algorithmic Security Checklist
+        </h3>
+        <div class="checklist-card">
+          <!-- Green Flags -->
+          <div class="checklist-group">
+            <div class="checklist-group-title green">✓ Verified Safeguards (Green Flags)</div>
+            <ul class="checklist-items" id="listGreenFlags" style="color: #34d399;"></ul>
+          </div>
+
+          <!-- Warnings -->
+          <div class="checklist-group" style="margin-top: 14px;">
+            <div class="checklist-group-title warn">⚠ Cautionary Warnings</div>
+            <ul class="checklist-items" id="listWarnings" style="color: #fbbf24;"></ul>
+          </div>
+
+          <!-- Red Flags -->
+          <div class="checklist-group" style="margin-top: 14px;">
+            <div class="checklist-group-title red">✗ Critical Red Flags (Fatal Vulnerabilities)</div>
+            <ul class="checklist-items" id="listRedFlags" style="color: #f87171; font-weight: 600;"></ul>
+          </div>
+        </div>
+
+        <!-- Four Pillar Progress Bars -->
+        <h3 class="audit-section-title">
+          <span>📊</span> Security Pillar Breakdown
+        </h3>
+        <div class="pillars-grid">
+          <div class="pillar-card">
+            <div class="pillar-name">Smart Contract</div>
+            <div class="pillar-score-row">
+              <span class="pillar-score-val" id="valContractSec">90%</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="barContractSec" style="width: 90%;"></div>
+            </div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-name">Liquidity Lock</div>
+            <div class="pillar-score-row">
+              <span class="pillar-score-val" id="valLiquidity">100%</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="barLiquidity" style="width: 100%;"></div>
+            </div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-name">Holder Distribution</div>
+            <div class="pillar-score-row">
+              <span class="pillar-score-val" id="valHolders">85%</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="barHolders" style="width: 85%;"></div>
+            </div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-name">Trading Integrity</div>
+            <div class="pillar-score-row">
+              <span class="pillar-score-val" id="valTrading">80%</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="barTrading" style="width: 80%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Technical Specification Details Table -->
+        <h3 class="audit-section-title">
+          <span>🔍</span> Technical Audit Parameters
+        </h3>
+        <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 24px;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left;">
+            <tbody>
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 10px 16px; color: var(--text-dim); width: 35%;">Token Age</td>
+                <td style="padding: 10px 16px; font-weight: 600;" id="tdAge">-</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 10px 16px; color: var(--text-dim);">Liquidity Pool</td>
+                <td style="padding: 10px 16px; font-weight: 600;" id="tdLiquidity">-</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 10px 16px; color: var(--text-dim);">LP Locked Status</td>
+                <td style="padding: 10px 16px; font-weight: 600;" id="tdLpLock">-</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 10px 16px; color: var(--text-dim);">Market Cap (FDV)</td>
+                <td style="padding: 10px 16px; font-weight: 600;" id="tdMcap">-</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 10px 16px; color: var(--text-dim);">Trading Taxes</td>
+                <td style="padding: 10px 16px; font-weight: 600;" id="tdTaxes">-</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 10px 16px; color: var(--text-dim);">Top 10 Holders Holding</td>
+                <td style="padding: 10px 16px; font-weight: 600;" id="tdTop10">-</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 10px 16px; color: var(--text-dim);">Developer Wallet Holding</td>
+                <td style="padding: 10px 16px; font-weight: 600;" id="tdDevHoldings">-</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 10px 16px; color: var(--text-dim);">Honeypot Simulation</td>
+                <td style="padding: 10px 16px; font-weight: 700;" id="tdHoneypot">-</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 10px 16px; color: var(--text-dim);">Mint Authority</td>
+                <td style="padding: 10px 16px; font-weight: 600;" id="tdMintable">-</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 10px 16px; color: var(--text-dim);">Freeze Authority / Blacklist</td>
+                <td style="padding: 10px 16px; font-weight: 600;" id="tdFreezable">-</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 16px; color: var(--text-dim);">Ownership Renounced</td>
+                <td style="padding: 10px 16px; font-weight: 600;" id="tdRenounced">-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <div class="link-buttons">
+          <a href="#" target="_blank" id="linkDexscreener" class="link-btn">
+            📊 View on DexScreener ↗
+          </a>
+          <a href="#" target="_blank" id="linkExplorer" class="link-btn">
+            🔍 Block Explorer ↗
+          </a>
+        </div>
+        <button class="btn-export" id="btnExportReport">
+          📥 Download Audit Report (.md)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cookie Consent Banner -->
+  <div class="cookie-banner" id="cookieBanner">
+    <div class="cookie-banner-content">
+      <div class="cookie-icon">🍪</div>
+      <div class="cookie-text">
+        <h4>Cookie & Privacy Preferences</h4>
+        <p>This application uses cookies to save your active filters, pinned watchlist, and alert chime settings. You can manage your preferences or accept all cookies.</p>
+      </div>
+      <div class="cookie-actions">
+        <button class="btn-cookie-accept" id="btnAcceptCookies">Accept All</button>
+        <button class="btn-cookie-essential" id="btnEssentialCookies">Essential Only</button>
+        <button class="btn-cookie-manage" id="btnManageCookies">Preferences</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cookie Preferences Modal -->
+  <div class="modal-overlay" id="cookieModalOverlay">
+    <div class="modal-container" style="max-width: 540px;">
+      <div class="modal-header">
+        <h3 style="font-size: 1.15rem; display: flex; align-items: center; gap: 8px;">
+          <span>🍪</span> Cookie & Privacy Settings
+        </h3>
+        <button class="modal-close-btn" id="cookieModalClose">✕</button>
+      </div>
+      <div class="modal-body" style="font-size: 0.88rem;">
+        <p style="color: var(--text-muted); margin-bottom: 16px;">
+          Configure how Aegis Token Radar stores session data on your device.
+        </p>
+
+        <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 14px; margin-bottom: 12px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <strong>Essential Cookies (Required)</strong>
+            <span style="color: var(--safe-green); font-size: 0.8rem; font-weight: 700;">ALWAYS ON</span>
+          </div>
+          <p style="color: var(--text-dim); font-size: 0.8rem;">
+            Enables basic security, active radar session token, and prevents fraud.
+          </p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 14px; margin-bottom: 12px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <strong>User Preferences & Radar Settings</strong>
+            <input type="checkbox" id="checkPrefCookies" checked style="accent-color: var(--accent-blue); width: 16px; height: 16px;">
+          </div>
+          <p style="color: var(--text-dim); font-size: 0.8rem;">
+            Remembers your chosen chain filter (e.g. Solana, Base), minimum liquidity, and audio chime volume.
+          </p>
+        </div>
+
+        <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+          <button id="btnClearCookies" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #f87171; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.8rem;">
+            Clear All Stored Cookies
+          </button>
+          <button id="btnSaveCookiePrefs" class="btn-scan" style="padding: 6px 18px; font-size: 0.85rem;">
+            Save Preferences
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
